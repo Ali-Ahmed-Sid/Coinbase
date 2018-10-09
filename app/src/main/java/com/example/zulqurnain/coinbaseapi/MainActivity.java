@@ -23,8 +23,8 @@ import roboguice.util.RoboAsyncTask;
 
 public class MainActivity extends RoboActivity {
 
-    private static final String CLIENT_ID = "5c9df3d9ac69af05fc03be0c25e8b75bc578c883f65cd3cb329201f29e29e5d5";
-    private static final String CLIENT_SECRET = "7676804342763d9be5a84296839db19a3117161df4ad22be3a838234a7bc9e51";
+    private static final String CLIENT_ID = "37ccb7e87145ca56b06554b50a6f54b9f39d9c3cecc798038fd767d2e903f6fe";
+    private static final String CLIENT_SECRET = "bdd4f8fa882bd2a2e054567779d3ba08645b4b98c5bc255ae00f3e0888935587";
     private static final String REDIRECT_URI = "coinbase-android-example://coinbase-oauth";
     private String token ="";
     private TextView mTextView;
