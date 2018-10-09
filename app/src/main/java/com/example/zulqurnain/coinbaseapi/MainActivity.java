@@ -95,7 +95,7 @@ public class MainActivity extends RoboActivity {
         mTextView = findViewById(R.id.the_text_view);
 
         try {
-            OAuth.beginAuthorization(this, CLIENT_ID, "", REDIRECT_URI, null);
+            OAuth.beginAuthorization(this, CLIENT_ID, "user", REDIRECT_URI, null);
       //      OAuth.completeAuthorization(this,CLIENT_ID,CLIENT_SECRET,Uri.parse(REDIRECT_URI));
             token = OAuth.getLoginCSRFToken(this);
 
