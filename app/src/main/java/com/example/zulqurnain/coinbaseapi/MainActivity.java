@@ -2,6 +2,7 @@ package com.example.zulqurnain.coinbaseapi;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import com.coinbase.android.sdk.OAuth;
 import com.coinbase.api.Coinbase;
 import com.coinbase.api.CoinbaseBuilder;
 import com.coinbase.api.entity.OAuthTokensResponse;
+import com.coinbase.api.entity.User;
 import com.coinbase.api.exception.CoinbaseException;
 import com.example.zulqurnain.coinbaseapi.R;
 
@@ -33,11 +35,13 @@ public class MainActivity extends RoboActivity {
         public DisplayEmailTask(OAuthTokensResponse tokens) {
             super(MainActivity.this);
             mTokens = tokens;
+
+
         }
 
         public String call() throws Exception {
-            Coinbase coinbase = new CoinbaseBuilder().withAccessToken(mTokens.getAccessToken()).build();
-            return coinbase.getUser().getEmail();
+           Coinbase  cb = new CoinbaseBuilder().withAccessToken(mTokens.getAccessToken()).build();
+            return cb.getUser().getEmail();
         }
 
         @Override
@@ -48,6 +52,7 @@ public class MainActivity extends RoboActivity {
         @Override
         public void onSuccess(String email) {
             mTextView.setText("Success! The user's email address is: " + email);
+
         }
     }
 
@@ -88,14 +93,17 @@ public class MainActivity extends RoboActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextView = findViewById(R.id.the_text_view);
+
         try {
-            OAuth.beginAuthorization(this, CLIENT_ID, "user", REDIRECT_URI, null);
-        } catch (CoinbaseException ex) {
+            OAuth.beginAuthorization(this, CLIENT_ID, "", REDIRECT_URI, null);
+      //      OAuth.completeAuthorization(this,CLIENT_ID,CLIENT_SECRET,Uri.parse(REDIRECT_URI));
+            token = OAuth.getLoginCSRFToken(this);
+
+        } catch (Exception ex) {
             mTextView.setText("There was an error redirecting to Coinbase: " + ex.getMessage());
         }
-        Coinbase cb = new CoinbaseBuilder()
-                .withAccessToken(token)
-                .build();
+
+
     }
 
 }
